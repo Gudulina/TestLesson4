@@ -30,18 +30,46 @@
 # 3. Задайте последовательность чисел.
 # Напишите программу, которая выведет список неповторяющихся элементов исходной последовательности.
 
-numbers = list(input('Введите числа через пробел: ').split())
-def get_unique_sp(numbers):
-    sp = []
-    for i in numbers:
-        if i not in sp:
-            sp.append(i)
-    print(sp)
+# numbers = list(input('Введите числа через пробел: ').split())
+# def get_unique_sp(numbers):
+#     sp = []
+#     for i in numbers:
+#         if i not in sp:
+#             sp.append(i)
+#     print(sp)
 
-get_unique_sp(numbers)
-# Задана натуральная степень k. Сформировать случайным образом список коэффициентов (значения от 0 до 100) многочлена и записать в файл многочлен степени k.
+# get_unique_sp(numbers)
 
+
+# 4. Задана натуральная степень k. Сформировать случайным образом список коэффициентов (значения от 0 до 100) многочлена и записать в файл многочлен степени k.
 # Пример:
+# k=2 => 2*d² + 4*d + 5 = 0 или d² + 5 = 0 или 10*d² = 0
+from random import randint
+import itertools
+k = int(input('k = '))
 
-# - k=2 => 2*d² + 4*d + 5 = 0 или d² + 5 = 0 или 10*d² = 0
+def get_koeff(k):
+    koeff = [randint(0, 100) for i in range (k + 1)]
+    while koeff[0] == 0:
+        koeff[0] = randint(1, 100) 
+    return koeff
+
+def get_polynomial(k, koeff):
+    var = ['*x^']*(k-1) + ['*x']
+    polynomial = [[a, b, c] for a, b, c  in itertools.zip_longest(koeff, var, range(k, 1, -1), fillvalue = '') if a !=0]
+    for x in polynomial:
+        x.append(' + ')
+    polynomial = list(itertools.chain(*polynomial))
+    polynomial[-1] = ' = 0'
+    return "".join(map(str, polynomial)).replace(' 1*x',' x')
+
+koeff = get_koeff(k)
+polynom = get_polynomial(k, koeff)
+print(polynom)
+
+with open('Polynomial.txt', 'w') as data:
+    data.write(polynom)
+
+
+
 # Даны два файла, в каждом из которых находится запись многочлена. Задача - сформировать файл, содержащий сумму многочленов.
