@@ -1,6 +1,7 @@
 # 1. Вычислить число c заданной точностью d
 # Пример:
 # при $d = 0.001, π = 3.141.$    $10^{-1} ≤ d ≤10^{-10}$
+
 # import math
 # from math import pi
 # d = list(input('d = '))
@@ -30,15 +31,8 @@
 # 3. Задайте последовательность чисел.
 # Напишите программу, которая выведет список неповторяющихся элементов исходной последовательности.
 
-# numbers = list(input('Введите числа через пробел: ').split())
-# def get_unique_sp(numbers):
-#     sp = []
-#     for i in numbers:
-#         if i not in sp:
-#             sp.append(i)
-#     print(sp)
-
-# get_unique_sp(numbers)
+numbers = list(input('Введите числа через пробел: ').split())
+print(tuple(filter(lambda num: numbers.count(num) == 1, numbers)))
 
 
 # 4. Задана натуральная степень k.
@@ -76,9 +70,4 @@
 
 # 5. Даны два файла, в каждом из которых находится запись многочлена. Задача - сформировать файл, содержащий сумму многочленов.
 
-from sympy.parsing.sympy_parser import parse_expr
-
-expression = "-2+x^1-3*x^2+x^2+100*x^3-2*x"
-x = 0
-formula = expression.replace('x', str(x)).replace('^', '**')
-print(parse_expr(formula))
+# Уже не остается времени на то, чтобы гуглить, а имеющихся знаний не достаточно для этой задачи.
